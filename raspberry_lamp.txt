@@ -1,0 +1,75 @@
+raspberry
+
+Download raspian image
+flash the image into sd card via baleno_etcher
+
+
+
+step 1
+cd /boot 
+touch ssh
+enter wpa_supplicant.config file
+==============================
+sudo vim /etc/network/interfaces
+-----------------------------------------------------------
+
+source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+iface eth0 inet manual
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+allow-hotplug wlan1
+iface wlan1 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+-------------------------------------------------------------------------------------
+
+
+to find raspberry pi IP in same network
+birju@vostro:~$ ping -c 4 raspberrypi.local
+
+or
+
+nmap -sL $(hostname -I | cut -f1 -d ' ')/24 
+
+
+sudo raspi-config
+===========================
+
+Lamp set-up in raspian-os on model 3B
+
+sudo apt install apache2 -y
+sudo service apache2 restart
+
+sudo apt install mariadb-server php-mysql -y
+sudo service apache2 restart
+
+sudo mysql_secure_installation
+
+
+sudo mysql --user=root --password                                                               #####  passwd need to remember while set-up
+show databases;
+exit;
+================
+Install phpMyAdmin on Raspberry Pi
+sudo apt install phpmyadmin -y                                                                                     
+PHPMyAdmin installation program will ask you few questions. We’ll use the dbconfig-common.
+
+Select Apache2 when prompted and press the Enter key
+Configuring phpmyadmin? OK                                                                       #### username:phpmyadmin   password:password
+Configure database for phpmyadmin with dbconfig-common? Yes
+Type your password and press OK
+------------------------
+Enable the PHP MySQLi extension and restart Apache2 for changes to take effect:
+
+pi@raspberrypi:/var/www/html $ sudo phpenmod mysqli
+pi@raspberrypi:/var/www/html $ sudo service apache2 restart
+
+pi@raspberrypi:/var/www/html $ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+
