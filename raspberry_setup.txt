@@ -1,0 +1,40 @@
+raspberry
+
+Download raspian image
+flash the image into sd card via baleno_etcher
+
+
+
+step 1
+cd /boot 
+touch ssh
+enter wpa_supplicant.config file
+==============================
+sudo vim /etc/network/interfaces
+-----------------------------------------------------------
+
+source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+iface eth0 inet manual
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+allow-hotplug wlan1
+iface wlan1 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+-------------------------------------------------------------------------------------
+
+
+to find raspberry pi IP in same network
+birju@vostro:~$ ping -c 4 raspberrypi.local
+
+or
+
+nmap -sL $(hostname -I | cut -f1 -d ' ')/24 
+
