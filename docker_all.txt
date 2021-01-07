@@ -1,3 +1,6 @@
+To make container run continuously 
+Docker update --restart unless-stopped docker_id-daalo
+
 Images and Containers
   A docker image is a collection of bin/lib that are necessary for 
 a s/w application to run.All these image are available on the cloud
