@@ -1,5 +1,5 @@
 To make container run continuously 
-Docker update --restart unless-stopped docker_id-daalo
+docker update --restart unless-stopped docker_id-daalo
 
 Images and Containers
   A docker image is a collection of bin/lib that are necessary for 
